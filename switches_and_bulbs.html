@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switches and Bulbs</title>
+</head>
+
+<body>
+<center><h1>Switches and Bulbs</h1>
+    <button type="button" onclick="turn();">Switch</button> <br/>
+    <p id="statusswitch"></p><br/><br/>
+    <button type="button" >Electric Lamp</button><br/>
+    <p id="statuslamp"></p></center>
+
+<script>
+
+    let ElectricLamp = function(){
+      this.status = "off";
+      this.turnOn = function () {
+          return this.status = "on";
+      };
+      this.turnOff = function () {
+            return this.status = "off";
+      };
+      this.light = function () {
+          if (this.status === "on"){
+              return  document.getElementById('statuslamp').innerHTML = 'Electric Lamp Light !!!'
+          }
+          else {
+              return  document.getElementById('statuslamp').innerHTML = 'Electric Lamp NOT Light !!!'
+          }
+      }
+    };
+
+    let SwitchButton = function () {
+    this.status = "off";
+    this.setLamp = function (elctriclamp) {
+        this.electriclamp = elctriclamp;
+    };
+    this.connectToLamp = function () {
+        return this.electriclamp ;
+    };
+    this.switchOn = function () {
+        return this.status = "on";
+    };
+    this.switchOff = function () {
+            return this.status = "off";
+    };
+};
+
+    let lamp = new ElectricLamp();
+    let switchbutton = new  SwitchButton();
+    switchbutton.setLamp(lamp);
+
+    function turn() {
+         let answer = confirm('You want turn on or turn off ?');
+         if (answer ){
+             document.getElementById('statusswitch').innerHTML = switchbutton.switchOn();
+             switchbutton.connectToLamp().turnOn();
+             switchbutton.connectToLamp().light();
+         }
+         else {
+             document.getElementById('statusswitch').innerHTML = switchbutton.switchOff();
+             switchbutton.connectToLamp().turnOff();
+             switchbutton.connectToLamp().light();
+         }
+    }
+
+
+
+
+</script>
+</body>
+</html>
